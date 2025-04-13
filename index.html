@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bunga Untukmu</title>
+    <style>
+        body {
+            margin: 0;
+    overflow: hidden;
+    background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .sky {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .sun {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #fff700, #ff9900);
+            border-radius: 50%;
+            animation: shine 3s infinite alternate;
+        }
+
+        @keyframes shine {
+            from {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            to {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        .cloud {
+            position: absolute;
+            top: 100px;
+            background: #b3d9ff;
+            /* 💧 Warna awan biru muda */
+            border-radius: 50%;
+            animation: moveClouds 60s linear infinite;
+        }
+
+        .cloud::before,
+        .cloud::after {
+            content: "";
+            position: absolute;
+            background: #b3d9ff;
+            border-radius: 50%;
+        }
+
+        .cloud1 {
+            width: 200px;
+            height: 80px;
+            left: -200px;
+        }
+
+        .cloud1::before {
+            width: 100px;
+            height: 100px;
+            top: -30px;
+            left: 50px;
+        }
+
+        .cloud1::after {
+            width: 120px;
+            height: 120px;
+            top: -20px;
+            left: 120px;
+        }
+
+        @keyframes moveClouds {
+            0% {
+                left: -300px;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        .rain {
+            position: absolute;
+            width: 2px;
+            height: 10px;
+            background: #3399ff;
+            animation: fall 1s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(200px);
+                opacity: 0;
+            }
+        }
+
+        .ground {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to top, #3e8e41, #6ac46e);
+            z-index: 2;
+        }
+
+        .flower {
+            position: absolute;
+            bottom: 150px;
+            width: 100px;
+            height: 200px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: sway 3s ease-in-out infinite;
+        }
+
+        .stem {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 10px;
+            height: 150px;
+            background: green;
+            border-radius: 5px;
+        }
+
+        .petal {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: pink;
+            border-radius: 50%;
+            transform: scale(0);
+            opacity: 0;
+            transition: transform 1s ease-out, opacity 1s ease-out;
+        }
+
+        .petal.bloom {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .petal:nth-child(1) {
+            top: 20px;
+            left: 25px;
+        }
+
+        .petal:nth-child(2) {
+            top: 0;
+            left: 50px;
+        }
+
+        .petal:nth-child(3) {
+            top: 20px;
+            left: 75px;
+        }
+
+        .petal:nth-child(4) {
+            top: 50px;
+            left: 50px;
+        }
+
+        .petal:nth-child(5) {
+            top: 20px;
+            left: 50px;
+            background: yellow;
+        }
+
+        @keyframes sway {
+            0% {
+                transform: translateX(-50%) rotate(0deg);
+            }
+
+            50% {
+                transform: translateX(-50%) rotate(2deg);
+            }
+
+            100% {
+                transform: translateX(-50%) rotate(-2deg);
+            }
+        }
+
+        .message {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: #ff3e7f;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 3s ease-in-out;
+            z-index: 5;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -70%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .popup-flower {
+    position: absolute;
+    font-size: 24px;
+    animation: popup 2s ease-out forwards;
+    pointer-events: none;
+    z-index: 999;
+}
+
+@keyframes popup {
+    0% {
+        transform: scale(0.5) translateY(0px);
+        opacity: 0;
+    }
+    30% {
+        transform: scale(1.2) translateY(-10px);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1) translateY(-60px);
+        opacity: 0;
+    }
+}
+
+
+.message button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #ff9acb;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
+}
+
+.message button:hover {
+    background-color: #ff6fae;
+}
+
+.story {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px;
+    height: 300px; /* Tinggi tetap untuk mengaktifkan scroll */
+    overflow-y: auto; /* Scroll secara vertikal */
+    font-size: 20px;
+    color: #333;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 6;
+    animation: fadeInStory 2s ease-in-out;
+    scrollbar-width: thin; /* Untuk Firefox */
+    scrollbar-color: #aaa #f0f0f0; /* Untuk Firefox */
+}
+
+/* Tambahan agar scrollbar terlihat lebih halus di WebKit (Chrome, Edge, Safari) */
+.story::-webkit-scrollbar {
+    width: 8px;
+}
+
+.story::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.story::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+    border-radius: 10px;
+}
+
+
+@keyframes fadeInStory {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+
+/* Tambahan styling */
+.bird {
+    position: absolute;
+    top: 150px;
+    left: -100px;
+    width: 60px;
+    height: 40px;
+    background: url('https://www.pngarts.com/files/3/Butterfly-Transparent-Image.png') no-repeat center/contain;
+    animation: flyAcross 20s linear infinite;
+    z-index: 10;
+}
+
+@keyframes flyAcross {
+    0% {
+        left: -100px;
+        top: 150px;
+    }
+    50% {
+        top: 120px;
+    }
+    100% {
+        left: 110%;
+        top: 150px;
+    }
+}
+
+.tree {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    width: 120px;
+    height: 200px;
+    background: url('https://png.pngtree.com/png-vector/20230418/ourmid/pngtree-birthday-cake-candles-celebration-transparent-png-image_6708793.png') no-repeat center/contain;
+    background-size: contain;
+    z-index: 3;
+}
+
+.tree2 {
+    left: auto;
+    right: 20px;
+}
+
+/* Tambahkan bunga-bunga kecil di tanah */
+.flower-small {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #ffb6c1;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #fff;
+    animation: bloomSmall 2s ease-out forwards;
+    opacity: 0;
+    z-index: 4;
+}
+
+@keyframes bloomSmall {
+    0% {
+        transform: scale(0.2);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+
+    </style>
+</head>
+
+<body>
+    <div class="sky">
+        <div class="sun"></div>
+        <div class="cloud cloud1" id="cloud1"></div>
+        <div class="flower">
+            <div class="stem"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+        </div>
+        <div class="message" id="messageBox">
+            Happy Birthday to the person I care about and love the most 🌸❤️
+            <br><br>
+            <button id="bungaButton">Tekan Disini</button>
+        </div>
+        
+        <div class="story" id="storyBox" style="display: none;"></div>
+        <div class="ground"></div>
+    </div>
+
+    <!-- Tambahkan di dalam .sky -->
+    <div class="bird"></div>
+    <div class="tree"></div>
+    <div class="tree tree2"></div>
+
+
+    <!-- 🌸 JavaScript Mekar Bunga + Hujan -->
+<script>
+    // Atur tanggal dan jam yang diizinkan (misalnya: 2025-04-14 jam 12:00)
+        const targetDate = new Date("2025-04-13T11:47:47");
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const now = new Date();
+
+            if (now < targetDate) {
+                document.body.innerHTML = `
+                <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: #111; color: white; text-align: center; font-size: 24px; padding: 30px;">
+                    Halaman bisa di buka Ketika Hari Ulang Tahun Kamu.<br><br>
+                    Coba lagi nanti pada Tanggal 19 🎀💐🎉 <strong>${targetDate.toLocaleString('id-ID')}</strong>.
+                </div>
+            `;
+            }
+        });
+    function spawnGroundFlowers() {
+            for (let i = 0; i < 30; i++) {
+                const flower = document.createElement('div');
+                flower.classList.add('flower-small');
+                flower.style.left = `${Math.random() * 100}%`;
+                flower.style.bottom = `${Math.random() * 150}px`;
+                document.body.appendChild(flower);
+                setTimeout(() => {
+                    flower.remove();
+                }, 6000);
+            }
+        }
+        spawnGroundFlowers();
+
+
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const petals = document.querySelectorAll('.petal');
+
+        // Bunga mekar satu per satu
+        petals.forEach((petal, index) => {
+            setTimeout(() => {
+                petal.classList.add('bloom');
+            }, index * 500);
+        });
+
+        // Efek hujan dari awan
+        const cloud = document.getElementById('cloud1');
+        const sky = document.querySelector('.sky');
+
+        function makeRain() {
+            for (let i = 0; i < 15; i++) {
+                const drop = document.createElement('div');
+                drop.classList.add('rain');
+                drop.style.left = (cloud.offsetLeft + Math.random() * 180) + 'px';
+                drop.style.top = (cloud.offsetTop + 60 + Math.random() * 20) + 'px';
+                drop.style.animationDuration = (0.8 + Math.random() * 0.5) + 's';
+                sky.appendChild(drop);
+                setTimeout(() => {
+                    drop.remove();
+                }, 1500);
+            }
+        }
+
+        setInterval(() => {
+            makeRain();
+        }, 1000);
+
+        // Fungsi untuk munculkan bunga imut 🌸
+        function spawnFlowers(jumlah) {
+            for (let i = 0; i < jumlah; i++) {
+                const flowerEmoji = document.createElement('div');
+                flowerEmoji.textContent = '🌸';
+                flowerEmoji.classList.add('popup-flower');
+                flowerEmoji.style.left = `${Math.random() * 100}%`;
+                flowerEmoji.style.top = `${Math.random() * 100}%`;
+                document.body.appendChild(flowerEmoji);
+
+                setTimeout(() => {
+                    flowerEmoji.remove();
+                }, 2000);
+            }
+        }
+
+        // Klik pesan → munculkan 5 bunga
+        const message = document.querySelector('.message');
+        message.addEventListener('click', () => {
+            spawnFlowers(5);
+        });
+
+        // Klik tombol → munculkan 15 bunga dan tampilkan cerita
+        const button = document.getElementById('bungaButton');
+        button.addEventListener('click', () => {
+            spawnFlowers(15);
+
+            // Sembunyikan pesan awal
+            const messageBox = document.getElementById('messageBox');
+            messageBox.style.display = 'none';
+
+            // Tampilkan cerita romantis
+            const storyBox = document.getElementById('storyBox');
+            storyBox.innerHTML = `
+                Happy Birthday, Nur Aliza…🎉💐✨<br><br>
+                Hai Wanita Paling Aku Cintai, Terimakasi Pernah Hadir dalam Hidupku, maaf ya jika kehadiran aku sangat buruk dalam hidupmu, aku tau aku memiliki banyak kekurangan untukmu, Jujur Orang Paling Aku Cintai tetap kamu, selamat hari spesial dalam hidupmu ya.<br><br>
+                Aku selalu Berdoa agar Kamu selalu Sehat dan Bahagia, jika kamu Sangat Membenci Aku, Aku tetap Mencitaimu... Maaf Jika denganku tidak Sebahagia yang kamu Kira, tepi setidaknya Aku Bahagia dengan Kahadiran Kamu di Dunia ini :)<br><br>
+                Dan saat kamu membaca ini, ketahuilah...<br>
+                Kamu adalah alasan senyum seseorang hari ini, dan semejak Aku Kehilangan Kamu Aku tetap sendiri sampai sekarang, dan Aku Mati Rasa dengan siapapun Kecuali Kamu!🌸❤️<br><br>
+                Aku Sengaja Memberika Kamu Kado Ulang Tahun Dengan Cepat Walapaun Belum Tanggal 19, Karena aku ingin menjadi orang Pertama yang memberika Kamu Kado Ulang Tahun dan Ucapan <br><br>
+                Semoga Kamu Bahagia dengan dia ya, Semoga Kamu Mencintainya Melebihi Aku Mencintaimu, love you <3
+            `;
+            storyBox.style.display = 'block';
+        });
+    });
+</script>
+
+
+
+</body>
+
+</html>
