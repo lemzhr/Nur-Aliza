@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nur Aliza🎉💐✨</title>
+    <title>Nur Aliza</title>
     <style>
         body {
             margin: 0;
@@ -417,20 +417,49 @@
 
 
 <script>
-        const targetDate = new Date("2025-04-19T19:19:19");
+            const targetDate = new Date("2025-04-19T19:19:19");
 
-        window.addEventListener('DOMContentLoaded', () => {
-            const now = new Date();
-
-            if (now < targetDate) {
-                document.body.innerHTML = `
-                <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: #111; color: white; text-align: center; font-size: 24px; padding: 30px;">
-                    Halaman bisa di buka Ketika Hari Ulang Tahun Kamu.<br><br>
-                    Coba lagi nanti pada Tanggal 19 🎀💐🎉 <strong>${targetDate.toLocaleString('id-ID')}</strong>.
+                window.addEventListener('DOMContentLoaded', () => {
+                    const now = new Date();
+                    if (now < targetDate) {
+                        document.body.innerHTML = `
+                <div id="countdown-container" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: white; font-family: 'Segoe UI', sans-serif; text-align: center;">
+                    <h2 style="font-size: 32px; margin-bottom: 20px;">Halaman bisa di buka Ketika Hari Ulang Tahun Kamu</h2>
+                    <p style="font-size: 18px;">Coba lagi nanti pada Tanggal 19 🎀💐🎉 <strong>${targetDate.toLocaleString('id-ID')}</strong></p>
+                    <div id="countdown" style="margin-top: 30px; display: flex; gap: 20px; font-size: 28px;">
+                        <div><span id="hours">00</span><br>Jam</div>
+                        <div><span id="minutes">00</span><br>Menit</div>
+                        <div><span id="seconds">00</span><br>Detik</div>
+                    </div>
                 </div>
             `;
-            }
-        });
+
+                        const hoursEl = document.getElementById("hours");
+                        const minutesEl = document.getElementById("minutes");
+                        const secondsEl = document.getElementById("seconds");
+
+                        function updateCountdown() {
+                            const now = new Date();
+                            const diff = targetDate - now;
+
+                            if (diff <= 0) {
+                                location.reload(); // reload halaman saat waktu tiba
+                                return;
+                            }
+
+                            const hours = Math.floor(diff / (1000 * 60 * 60));
+                            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                            hoursEl.textContent = String(hours).padStart(2, '0');
+                            minutesEl.textContent = String(minutes).padStart(2, '0');
+                            secondsEl.textContent = String(seconds).padStart(2, '0');
+                        }
+
+                        updateCountdown();
+                        setInterval(updateCountdown, 1000);
+                    }
+                });
     function spawnGroundFlowers() {
             for (let i = 0; i < 30; i++) {
                 const flower = document.createElement('div');
