@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bunga Untukmu</title>
+    <title>Nur Aliza🎉💐✨</title>
     <style>
         body {
             margin: 0;
@@ -273,8 +273,8 @@
     transform: translate(-50%, -50%);
     width: 80%;
     max-width: 600px;
-    height: 300px; /* Tinggi tetap untuk mengaktifkan scroll */
-    overflow-y: auto; /* Scroll secara vertikal */
+    height: 300px;
+    overflow-y: auto;
     font-size: 20px;
     color: #333;
     background: rgba(255, 255, 255, 0.8);
@@ -284,11 +284,11 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     z-index: 6;
     animation: fadeInStory 2s ease-in-out;
-    scrollbar-width: thin; /* Untuk Firefox */
-    scrollbar-color: #aaa #f0f0f0; /* Untuk Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #aaa #f0f0f0;
 }
 
-/* Tambahan agar scrollbar terlihat lebih halus di WebKit (Chrome, Edge, Safari) */
+
 .story::-webkit-scrollbar {
     width: 8px;
 }
@@ -358,7 +358,7 @@
     right: 20px;
 }
 
-/* Tambahkan bunga-bunga kecil di tanah */
+
 .flower-small {
     position: absolute;
     width: 20px;
@@ -409,16 +409,15 @@
         <div class="ground"></div>
     </div>
 
-    <!-- Tambahkan di dalam .sky -->
+
     <div class="bird"></div>
     <div class="tree"></div>
     <div class="tree tree2"></div>
 
 
-    <!-- 🌸 JavaScript Mekar Bunga + Hujan -->
+
 <script>
-    // Atur tanggal dan jam yang diizinkan (misalnya: 2025-04-14 jam 12:00)
-        const targetDate = new Date("2025-04-13T12:00:00");
+        const targetDate = new Date("2025-04-19T19:19:19");
 
         window.addEventListener('DOMContentLoaded', () => {
             const now = new Date();
@@ -451,14 +450,14 @@
     window.addEventListener('DOMContentLoaded', () => {
         const petals = document.querySelectorAll('.petal');
 
-        // Bunga mekar satu per satu
+        
         petals.forEach((petal, index) => {
             setTimeout(() => {
                 petal.classList.add('bloom');
             }, index * 500);
         });
 
-        // Efek hujan dari awan
+        
         const cloud = document.getElementById('cloud1');
         const sky = document.querySelector('.sky');
 
@@ -480,7 +479,7 @@
             makeRain();
         }, 1000);
 
-        // Fungsi untuk munculkan bunga imut 🌸
+        
         function spawnFlowers(jumlah) {
             for (let i = 0; i < jumlah; i++) {
                 const flowerEmoji = document.createElement('div');
@@ -496,22 +495,22 @@
             }
         }
 
-        // Klik pesan → munculkan 5 bunga
+        
         const message = document.querySelector('.message');
         message.addEventListener('click', () => {
             spawnFlowers(5);
         });
 
-        // Klik tombol → munculkan 15 bunga dan tampilkan cerita
+        
         const button = document.getElementById('bungaButton');
         button.addEventListener('click', () => {
             spawnFlowers(15);
 
-            // Sembunyikan pesan awal
+            
             const messageBox = document.getElementById('messageBox');
             messageBox.style.display = 'none';
 
-            // Tampilkan cerita romantis
+            
             const storyBox = document.getElementById('storyBox');
             storyBox.innerHTML = `
                 Happy Birthday, Nur Aliza…🎉💐✨<br><br>
